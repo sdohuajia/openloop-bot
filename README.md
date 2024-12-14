@@ -1,3 +1,3 @@
 # openloop-bot
 
-wget -O Vana-SixGPT.sh https://raw.githubusercontent.com/sdohuajia/Vana-SixGPT/refs/heads/main/Vana-SixGPT.sh && sed -i 's/\r//' Vana-SixGPT.sh && chmod +x Vana-SixGPT.sh && ./Vana-SixGPT.sh
+wget -O openloop.sh https://raw.githubusercontent.com/sdohuajia/openloop-bot/refs/heads/main/openloop.sh && sed -i 's/\r//' openloop.sh && chmod +x openloop.sh && ./openloop.sh
