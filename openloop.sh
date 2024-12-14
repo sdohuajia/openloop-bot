@@ -67,6 +67,8 @@ function start_openloop() {
     
     echo "程序已在 screen 会话 'openloop' 中启动"
     echo "使用 'screen -r openloop' 可以查看运行状态"
+    
+    read -p "按任意键返回主菜单..."
 }
 
 # 查看日志
