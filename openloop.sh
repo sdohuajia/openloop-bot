@@ -90,6 +90,7 @@ function stop_openloop() {
     else
         echo "未发现正在运行的openloop程序"
     fi
+    read -p "按任意键返回主菜单..."
 }
 
 # 主菜单函数
