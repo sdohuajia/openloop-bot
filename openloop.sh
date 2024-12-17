@@ -60,32 +60,32 @@ function start_openloop() {
     echo "$email,$password,$proxy" > user.txt
 
     echo "配置完成,正在后台启动程序..."
-    screen -dmS openloop ./start.sh || {
-        echo "启动程序失败";
-        exit 1;
-    }
-    
-    echo "程序已在 screen 会话 'openloop' 中启动"
-    echo "使用 'screen -r openloop' 可以查看运行状态"
-    
-    read -p "按任意键返回主菜单..."
+    tmux new-session -d -s openloop './start.sh' || {
+    echo "启动程序失败";
+    exit 1;
+}
+
+   echo "程序已在 tmux 会话 'openloop' 中启动"
+   echo "使用 'tmux attach -t openloop' 可以查看运行状态"
+ 
+   read -p "按任意键返回主菜单..."
 }
 
 # 查看日志
 function view_logs() {
-    if ! screen -list | grep -q "openloop"; then
+    if ! tmux ls 2>/dev/null | grep -q "openloop"; then
         echo "未找到运行中的openloop会话"
         return 1
     fi
-    echo "正在连接到screen会话查看日志..."
-    echo "提示: 使用 Ctrl+A+D 组合键可以退出日志查看"
-    screen -r openloop
+    echo "正在连接到tmux会话查看日志..."
+    echo "提示: 使用 Ctrl+B 然后按 D 组合键可以退出日志查看"
+    tmux attach -t openloop
 }
 
 # 停止程序
 function stop_openloop() {
-    if screen -list | grep -q "openloop"; then
-        screen -S openloop -X quit
+    if tmux ls 2>/dev/null | grep -q "openloop"; then
+        tmux kill-session -t openloop
         echo "已停止openloop程序"
     else
         echo "未发现正在运行的openloop程序"
