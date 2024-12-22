@@ -10,18 +10,6 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 
-# 检查依赖
-function check_dependencies() {
-    local deps=(git npm screen)
-    for dep in "${deps[@]}"; do
-        if ! command -v $dep &>/dev/null; then
-            echo "未找到必要程序: $dep"
-            echo "正在安装..."
-            apt install -y $dep || { echo "安装 $dep 失败"; exit 1; }
-        fi
-    done
-}
-
 # 安装必要的软件包
 function start_openloop() {
     # 检查openloop目录是否已存在
